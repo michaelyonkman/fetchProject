@@ -16,15 +16,18 @@ export default function App() {
 
   const URL = 'https://fetch-hiring.s3.amazonaws.com/hiring.json';
 
-  const sortedByList = [];
+  const sortedList = [];
 
+  //function to sort data from API for rendering
   const sortData = (item) => {
     let id = item.listId;
+    //checking for valid name
     if (item.name && item.name.length) {
-      if (!sortedByList[id - 1]) {
-        sortedByList[id - 1] = { title: `List ${id}`, data: [] };
+      //pushing items to sortedList to format for rendering in a SectionList
+      if (!sortedList[id - 1]) {
+        sortedList[id - 1] = { title: `List ${id}`, data: [] };
       } else {
-        sortedByList[id - 1].data.push({ name: item.name, id: item.id });
+        sortedList[id - 1].data.push({ name: item.name, id: item.id });
       }
     }
   };
@@ -36,10 +39,11 @@ export default function App() {
     } else {
       let json = await response.json();
       json.forEach((item) => sortData(item));
-      sortedByList.forEach((list) => list.data.sort((a, b) => a.id - b.id));
+      //sorting list items by item number
+      sortedList.forEach((list) => list.data.sort((a, b) => a.id - b.id));
       setIsLoaded(true);
-      setItems(sortedByList);
-      console.log(sortedByList);
+      //items are now sorted by list number and item number and ready to render
+      setItems(sortedList);
     }
   };
 
