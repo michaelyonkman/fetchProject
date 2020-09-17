@@ -8,7 +8,7 @@ to install all dependencies.
 3. After `npm install` completes, you should run the command: `expo start` to start
 the app. At this point a new page opens in your laptop’s browser that shows a
 QR code on the left hand side.
-4. After you see the QR code, download the app “Expo” from the app store. [Link]
+4. After you see the QR code, download the app “Expo” from the app store.
 5. After completion, use the iPhone’s camera to point to the QR code and tap the
 pop up that shows up.
 7. You'll now be redirected to the app on Expo.
