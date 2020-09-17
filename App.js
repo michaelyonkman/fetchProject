@@ -6,6 +6,7 @@ import {
   View,
   SafeAreaView,
   SectionList,
+  Image,
 } from 'react-native';
 import Constants from 'expo-constants';
 
@@ -54,25 +55,42 @@ export default function App() {
 
   if (!isLoaded) {
     return (
-      <View>
+      <SafeAreaView>
         <Text>Loading...</Text>
-      </View>
+      </SafeAreaView>
     );
   } else {
     return (
-      <View style={styles.container}>
-        <SafeAreaView style={styles.container}>
-          <SectionList
-            sections={items}
-            keyExtractor={(item, index) => item + index}
-            renderItem={({ item }) => <Item title={item.name} />}
-            renderSectionHeader={({ section: { title } }) => (
-              <Text style={styles.header}>{title}</Text>
-            )}
+      <SafeAreaView style={styles.container}>
+        <View style={styles.imageView}>
+          <Image
+            source={{
+              uri:
+                'https://www.fetchrewards.com/assets/FetchRewardsHorizontalLogo.png',
+            }}
+            style={{
+              height: 100,
+              width: '100%',
+            }}
+            resizeMode="contain"
           />
-        </SafeAreaView>
+        </View>
+
+        <SectionList
+          showsVerticalScrollIndicator={false}
+          sections={items}
+          keyExtractor={(item, index) => item + index}
+          renderItem={({ item }) => (
+            <View style={styles.itemView}>
+              <Item title={item.name} />
+            </View>
+          )}
+          renderSectionHeader={({ section: { title } }) => (
+            <Text style={styles.header}>{title}</Text>
+          )}
+        />
         <StatusBar style="auto" />
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -81,18 +99,39 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: Constants.statusBarHeight,
-    marginHorizontal: 16,
+    marginHorizontal: 20,
   },
   item: {
-    backgroundColor: '#f9c2ff',
+    backgroundColor: '#f3b549',
     padding: 20,
     marginVertical: 8,
+    borderRadius: 20,
+    shadowOffset: { width: 5, height: 5 },
+    shadowColor: '#300c39',
+    shadowOpacity: 1.0,
+    width: '95%',
+  },
+  itemView: {
+    flex: 1,
+    alignItems: 'center',
   },
   header: {
     fontSize: 32,
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+    textDecorationLine: 'underline',
+    color: '#300c39',
     backgroundColor: '#fff',
+    textAlign: 'center',
   },
   title: {
     fontSize: 24,
+    color: '#300c39',
+    textAlign: 'center',
+  },
+  imageView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 50,
   },
 });
